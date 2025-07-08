@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "flutter_learn",
-      home: HomeView()
+      theme: ThemeData(primarySwatch: Colors.pink),
+      home: HomeView(),
     );
   }
 }
