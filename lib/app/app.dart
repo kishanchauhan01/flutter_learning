@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hello_app/views/home_view.dart';
+import 'package:hello_app/views/dashboard.dart';
+// import 'package:hello_app/views/home_view.dart';
+// import 'package:hello_app/views/login_page.dart';
 
 //stateless Widget is a widget that does not requires mutable state
 //stateless means the state is not going to be change it will be constant
@@ -12,9 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "flutter_learn",
       theme: ThemeData(primarySwatch: Colors.pink),
-      home: HomeView(),
+      home: DashBoard(),
     );
   }
 }
