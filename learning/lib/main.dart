@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning/data/constants.dart';
 import 'package:learning/data/notifiers.dart';
+import 'package:learning/views/pages/stop_watch.dart';
 // import 'package:learning/views/pages/stop_watch.dart';
 import 'package:learning/views/pages/welcome_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
               brightness: isDark ? Brightness.dark : Brightness.light,
             ),
           ),
-          home: WelcomePage(),
+          home: StopWatch(),
         );
       },
     );
