@@ -3,7 +3,6 @@ import 'package:learning/data/constants.dart';
 import 'package:learning/data/notifiers.dart';
 import 'package:learning/views/pages/stop_watch.dart';
 // import 'package:learning/views/pages/stop_watch.dart';
-import 'package:learning/views/pages/welcome_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -45,7 +44,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.teal,
-              brightness: isDark ? Brightness.dark : Brightness.light,
+              brightness: Brightness.light,
             ),
           ),
           home: StopWatch(),

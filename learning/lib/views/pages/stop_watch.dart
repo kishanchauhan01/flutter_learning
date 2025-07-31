@@ -13,6 +13,7 @@ class _StopWatchState extends State<StopWatch> {
   late Timer timer;
   String _secondtoText() => seconds <= 1 ? 'Second' : 'Seconds';
   int millis = 0;
+  final laps = <int>[];
   bool isTicking = false;
 
   @override
@@ -30,55 +31,48 @@ class _StopWatchState extends State<StopWatch> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
-          SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.teal),
-                  foregroundColor: WidgetStatePropertyAll(Colors.black),
-                ),
-                onPressed: () {
-                  isTicking ? null : _startTimer();
-                },
-                child: Row(children: [Text("Start"), Icon(Icons.play_arrow)]),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.red),
-                  foregroundColor: WidgetStatePropertyAll(Colors.black),
-                ),
-                onPressed: () {
-                  isTicking ? _stopTimer() : null;
-                },
-                child: Row(children: [Text("Stop"), Icon(Icons.stop)]),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.blue),
-                  foregroundColor: WidgetStatePropertyAll(Colors.black),
-                ),
-                onPressed: null,
-                child: Row(children: [Text("Pause"), Icon(Icons.pause)]),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.0,),
-          SizedBox(
-            width: 100.0,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Colors.amber),
-                foregroundColor: WidgetStatePropertyAll(Colors.black),
-              ),
-              onPressed: () => _clear(),
-              child: Row(children: [Text("Clear"), Icon(Icons.clear)]),
-            ),
-          ),
+          // SizedBox(height: 10.0),
+          Expanded(child: controlPanel()),
+          Expanded(child: _buildDisplay()),
         ],
       ),
+    );
+  }
+
+  Row controlPanel() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(Colors.teal),
+            foregroundColor: WidgetStatePropertyAll(Colors.black),
+          ),
+          onPressed: () {
+            isTicking ? null : _startTimer();
+          },
+          child: Row(children: [Text("Start"), Icon(Icons.play_arrow)]),
+        ),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(Colors.red),
+            foregroundColor: WidgetStatePropertyAll(Colors.black),
+          ),
+          onPressed: () {
+            isTicking ? _stopTimer() : null;
+          },
+          child: Row(children: [Text("Stop"), Icon(Icons.stop)]),
+        ),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(Colors.amber),
+            foregroundColor: WidgetStatePropertyAll(Colors.black),
+          ),
+          onPressed: () => _lapCLick(),
+          child: Row(children: [Text("Lap"), Icon(Icons.clear)]),
+        ),
+      ],
     );
   }
 
@@ -103,11 +97,15 @@ class _StopWatchState extends State<StopWatch> {
     });
   }
 
-  void _clear() {
-    timer.cancel();
-    setState(() {
-      seconds = 0.0;
-    });
+
+  void _lapCLick() {
+    if (isTicking) {
+      setState(() {
+        laps.add(millis);
+        millis = 0;
+      });
+    }
+    print(laps);
   }
 
   void _onTick(Timer timer) {
@@ -117,6 +115,18 @@ class _StopWatchState extends State<StopWatch> {
         seconds = millis / 1000;
       });
     }
+  }
+
+  Widget _buildDisplay() {
+    return ListView(
+      children: [
+        for (int i in laps)
+          ListTile(
+            leading: Icon(Icons.timer),
+            title: Text('Lap ${laps.indexOf(i) + 1}: ${i / 1000} seconds'),
+          ),
+      ],
+    );
   }
 
   @override
