@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+
+class BmiCalcPage extends StatefulWidget {
+  const BmiCalcPage({super.key});
+
+  @override
+  State<BmiCalcPage> createState() => _BmiCalcPageState();
+}
+
+class _BmiCalcPageState extends State<BmiCalcPage> {
+  TextEditingController heightTxtCtrl = TextEditingController();
+  TextEditingController weightTxtCtrl = TextEditingController();
+
+  double result = 0;
+  bool isValidate = false;
+
+  String msg = "";
+
+
+  void validate() {
+    if (weightTxtCtrl.text.isNotEmpty && heightTxtCtrl.text.isNotEmpty) {
+      isValidate = true;
+    } else {
+      isValidate = false;
+    }
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "BMI Calculator",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.teal,
+          ),
+        ),
+        centerTitle: true,
+      ),
+
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            SizedBox(height: 10.0),
+            TextField(
+              onChanged: (value) {
+                validate();
+              },
+              controller: weightTxtCtrl,
+              decoration: InputDecoration(
+                labelText: "Weight in kg",
+                hintText: "Enter your weight in kg",
+              ),
+            ),
+            SizedBox(height: 10.0),
+            TextField(
+              onChanged: (value) {
+                validate();
+              },
+              controller: heightTxtCtrl,
+              decoration: InputDecoration(
+                labelText: "Height in meters",
+                hintText: "Enter your height in meters",
+              ),
+            ),
+            SizedBox(height: 10.0),
+            ElevatedButton(
+              // style: ButtonStyle(backgroundColor: Colors.amber),
+              onPressed: isValidate
+                  ? () {
+                      double wt = double.parse(weightTxtCtrl.text);
+                      double ht = double.parse(heightTxtCtrl.text);
+                      result = wt / (ht * ht);
+
+                      if (result < 16) {
+                        msg = "Severe Thinness";
+                      } else if (result >= 16 && result <= 17) {
+                        msg = "Moderate thinness";
+                      } else if (result >= 17 && result <= 18.5) {
+                        msg = "Mild thinness";
+                      } else if (result >= 18.5 && result <= 25) {
+                        msg = "Normal";
+                      } else if (result >= 25 && result <= 30) {
+                        msg = "Overweight";
+                      } else if (result >= 30 && result <= 35) {
+                        msg = "Obese class1";
+                      } else if (result >= 35 && result <= 40) {
+                        msg = "Obese class2";
+                      } else if (result >= 40) {
+                        msg = "Obese class3";
+                      }
+
+                      setState(() {});
+                    }
+                  : null,
+              child: Text(
+                "Calculate",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              "Result: ${result.toStringAsFixed(2)} ",
+              style: TextStyle(fontSize: 30),
+            ),
+
+            msg.isNotEmpty ? Text(msg) : Text(""),
+          ],
+        ),
+      ),
+    );
+  }
+}

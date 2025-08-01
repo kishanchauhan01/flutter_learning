@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app1/constants.dart';
-import 'package:note_app1/main_page.dart';
+import 'package:note_app1/core/constants.dart';
+import 'package:note_app1/pages/main_page.dart';
 
 void main() {
   runApp(const MainApp());
