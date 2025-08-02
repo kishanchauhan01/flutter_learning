@@ -12,7 +12,7 @@ class SearchField extends StatelessWidget {
         hintText: "Search notes...",
         hintStyle: TextStyle(fontSize: 12),
         prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass, size: 18),
-        fillColor: black,
+        fillColor: const Color.fromARGB(255, 0, 0, 0),
         filled: true,
         isDense: true,
         contentPadding: EdgeInsets.zero,

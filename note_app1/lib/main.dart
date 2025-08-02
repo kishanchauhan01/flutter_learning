@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:note_app1/core/constants.dart';
 import 'package:note_app1/pages/main_page.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,11 +14,21 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        FlutterQuillLocalizations.delegate,
+      ],
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ),
         useMaterial3: true,
         fontFamily: 'Poppins',
-        scaffoldBackgroundColor: const Color(0xFF121212),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
         appBarTheme: Theme.of(context).appBarTheme.copyWith(
           backgroundColor: Colors.transparent,
           titleTextStyle: TextStyle(

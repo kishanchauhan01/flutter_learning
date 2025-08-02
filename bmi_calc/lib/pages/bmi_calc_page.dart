@@ -13,9 +13,8 @@ class _BmiCalcPageState extends State<BmiCalcPage> {
 
   double result = 0;
   bool isValidate = false;
-
+  Color msgColor = Colors.black;
   String msg = "";
-
 
   void validate() {
     if (weightTxtCtrl.text.isNotEmpty && heightTxtCtrl.text.isNotEmpty) {
@@ -78,19 +77,25 @@ class _BmiCalcPageState extends State<BmiCalcPage> {
 
                       if (result < 16) {
                         msg = "Severe Thinness";
-                      } else if (result >= 16 && result <= 17) {
+                        msgColor = Colors.green;
+                      } else if (result < 17) {
                         msg = "Moderate thinness";
-                      } else if (result >= 17 && result <= 18.5) {
+                        msgColor = Colors.amber;
+                      } else if (result < 18.5) {
                         msg = "Mild thinness";
-                      } else if (result >= 18.5 && result <= 25) {
+                        msgColor = Colors.orange;
+                      } else if (result < 25) {
                         msg = "Normal";
-                      } else if (result >= 25 && result <= 30) {
+                        msgColor = Colors.red;
+                      } else if (result < 30) {
                         msg = "Overweight";
-                      } else if (result >= 30 && result <= 35) {
+                        msgColor = const Color.fromARGB(255, 159, 42, 33);
+                      } else if (result < 35) {
                         msg = "Obese class1";
-                      } else if (result >= 35 && result <= 40) {
+                        msgColor = const Color.fromARGB(255, 255, 0, 0);
+                      } else if (result < 40) {
                         msg = "Obese class2";
-                      } else if (result >= 40) {
+                      } else {
                         msg = "Obese class3";
                       }
 
@@ -108,7 +113,9 @@ class _BmiCalcPageState extends State<BmiCalcPage> {
               style: TextStyle(fontSize: 30),
             ),
 
-            msg.isNotEmpty ? Text(msg) : Text(""),
+            msg.isNotEmpty
+                ? Text(msg, style: TextStyle(color: msgColor))
+                : Text(""),
           ],
         ),
       ),

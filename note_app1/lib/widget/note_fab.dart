@@ -14,13 +14,13 @@ class NoteFab extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 255, 255, 255),
+            color: white,
             offset: Offset(4, 4),
           ),
         ],
       ),
       child: FloatingActionButton.large(
-        onPressed: null,
+        onPressed: onPressed,
         backgroundColor: primary,
         foregroundColor: white,
         shape: RoundedRectangleBorder(

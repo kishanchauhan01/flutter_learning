@@ -10,6 +10,9 @@ dependencies:
     flutter:
         sdk: flutter
     flutter_launcher_icons: ^0.14.4
+    flutter_localizations:
+        sdk: flutter
+    flutter_quill: ^11.4.2
     font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
