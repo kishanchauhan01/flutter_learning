@@ -1,11 +1,14 @@
 import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:note_app1/core/constants.dart";
+import "package:note_app1/models/note.dart";
 import "package:note_app1/pages/new_or_edit_note_page.dart";
+import "package:note_app1/widget/note_tag.dart";
 
 class NoteCard extends StatelessWidget {
-  const NoteCard({required this.isInGrid, super.key});
+  const NoteCard({required this.note, required this.isInGrid, super.key});
 
+  final Note note;
   final bool isInGrid;
 
   @override
@@ -63,21 +66,7 @@ class NoteCard extends StatelessWidget {
               child: Row(
                 children: List.generate(
                   1,
-                  (index) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: const Color.fromARGB(186, 195, 158, 24),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    margin: EdgeInsets.only(right: 8.0),
-                    child: Text(
-                      "First chip",
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                      ),
-                    ),
-                  ),
+                  (index) => NoteTag(label: 'Note tag'),
                 ),
               ),
             ),

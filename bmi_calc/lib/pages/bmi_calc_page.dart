@@ -56,15 +56,26 @@ class _BmiCalcPageState extends State<BmiCalcPage> {
               ),
             ),
             SizedBox(height: 10.0),
-            TextField(
-              onChanged: (value) {
-                validate();
-              },
+            TextFormField(
               controller: heightTxtCtrl,
               decoration: InputDecoration(
                 labelText: "Height in meters",
                 hintText: "Enter your height in meters",
               ),
+              // validator: (value) { // validator only in TextFormField not int TextField
+              //   if (value == null || value.isEmpty) {
+              //     return 'Please enter your height';
+              //   }
+              //   final height = double.tryParse(value);
+              //   if (height == null || height <= 0) {
+              //     return 'Please enter a valid height in meters';
+              //   }
+              //   return null;
+              // },
+
+              onChanged: (value) {
+                validate();
+              },
             ),
             SizedBox(height: 10.0),
             ElevatedButton(
