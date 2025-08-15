@@ -6,4 +6,8 @@ class NotesProvider extends ChangeNotifier {
 
   List<Note> get notes => [..._notes];
 
+  void addNote(Note note) {
+    _notes.add(note);
+    notifyListeners();
+  }
 }
