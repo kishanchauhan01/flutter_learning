@@ -8,37 +8,39 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Quize App",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     "Quize App",
+      //     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      //   ),
+      //   centerTitle: true,
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             ListTile(
               leading: Text("1", style: TextStyle(fontSize: 20)),
-              title: Text("Rule1", style: TextStyle(fontSize: 20)),
+              title: Text(
+                "All question are compulsory",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             ListTile(
               leading: Text("2", style: TextStyle(fontSize: 20)),
-              title: Text("Rule2", style: TextStyle(fontSize: 20)),
+              title: Text(
+                "You can't select multiple options",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             ListTile(
               leading: Text("3", style: TextStyle(fontSize: 20)),
-              title: Text("Rule3", style: TextStyle(fontSize: 20)),
+              title: Text(
+                "Total time for quize is 30 min",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
-            ListTile(
-              leading: Text("4", style: TextStyle(fontSize: 20)),
-              title: Text("Rule4", style: TextStyle(fontSize: 20)),
-            ),
-            ListTile(
-              leading: Text("5", style: TextStyle(fontSize: 20)),
-              title: Text("Rule5", style: TextStyle(fontSize: 20)),
-            ),
+
             Spacer(),
             ElevatedButton(
               onPressed: () {

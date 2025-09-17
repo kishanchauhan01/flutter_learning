@@ -2,9 +2,11 @@ import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:intl/intl.dart";
 import "package:note_app1/core/constants.dart";
+import "package:note_app1/data/new_note_controller.dart";
 import "package:note_app1/models/note.dart";
 import "package:note_app1/pages/new_or_edit_note_page.dart";
 import "package:note_app1/widget/note_tag.dart";
+import "package:provider/provider.dart";
 
 class NoteCard extends StatelessWidget {
   const NoteCard({required this.note, required this.isInGrid, super.key});
@@ -19,9 +21,10 @@ class NoteCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) {
-              return NewOrEditNotePage(isNewNote: false);
-            },
+            builder: (context) => ChangeNotifierProvider(
+              create: (_) => NewNoteController(),
+              child: NewOrEditNotePage(isNewNote: false),
+            ),
           ),
         );
       },
@@ -96,7 +99,7 @@ class NoteCard extends StatelessWidget {
                         color: const Color.fromARGB(255, 160, 160, 160),
                       ),
                     ),
-                    
+
             if (isInGrid) Spacer(),
 
             Row(

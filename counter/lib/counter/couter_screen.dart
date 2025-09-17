@@ -63,3 +63,11 @@ class CounterScreen extends StatelessWidget {
     );
   }
 }
+
+//group of document known as collection
+// In firebase we have collection inside the document
+//types of communication:
+//1) http
+//2) websocket
+// 3)subsciber patten
+// 4)gRPC

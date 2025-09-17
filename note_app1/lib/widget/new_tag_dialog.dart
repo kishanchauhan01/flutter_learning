@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app1/core/constants.dart';
+import 'package:note_app1/widget/dialog_btn.dart';
 
 class NewTagDialog extends StatefulWidget {
   const NewTagDialog({super.key});
@@ -78,31 +79,15 @@ class _NewTagDialogState extends State<NewTagDialog> {
           },
         ),
         SizedBox(height: 24),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            boxShadow: [BoxShadow(offset: Offset(2, 2), color: white)],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: ElevatedButton(
+         DialogBtn(
+            label: "Add",
             onPressed: () {
               if (tagKey.currentState?.validate() ?? false) {
                 Navigator.pop(context, tagController.text.trim());
               }
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: primary,
-              foregroundColor: white,
-              side: BorderSide(color: black),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              elevation: 0,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-
-            child: Text("Add tag"),
           ),
-        ),
+        
       ],
     );
   }

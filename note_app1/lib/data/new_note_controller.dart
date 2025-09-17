@@ -45,7 +45,7 @@ class NewNoteController extends ChangeNotifier {
   List<String> get tags => [..._tags];
 
   bool get canSaveNote {
-    final String? newTitle = title.isNotEmpty ? title : null;
+    final String? newTitle = title.trim().isNotEmpty ? title : null;
     final String? newContent = content.toPlainText().trim().isNotEmpty
         ? content.toPlainText()
         : null;

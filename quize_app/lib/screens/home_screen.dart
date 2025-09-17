@@ -1,0 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:quize_app/screens/start_screen.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Quize 1"), centerTitle: true),
+      body: Center(child: StartScreen()),
+    );
+  }
+}
