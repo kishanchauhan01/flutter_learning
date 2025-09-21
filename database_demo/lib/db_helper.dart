@@ -40,9 +40,10 @@ class DbHelper {
 
     List<ContactModel> contactList = [];
 
-    final coursr = await dbClient.query('contact_master');
+    final corser = await dbClient.query('contact_master');
 
     for (int i = 0; i < corser.length; i++) {
+      int id = corser[i]['id'] as int;
       String name = corser[i]['name'].toString();
       String mobile = corser[i]['mobile'].toString();
 
@@ -52,5 +53,15 @@ class DbHelper {
     }
 
     return contactList;
+  }
+
+  Future<int> deleteRecord(int id) async {
+    final dbClient = await getDb();
+
+    return await dbClient.delete(
+      'contact_master',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }

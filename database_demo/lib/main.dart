@@ -1,3 +1,4 @@
+import 'package:database_demo/contact_model.dart';
 import 'package:database_demo/db_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,45 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   TextEditingController nameController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
+
+  List<ContactModel> contactList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadContacts();
+  }
+
+  Future<void> _loadContacts() async {
+    DbHelper dbHelper = DbHelper();
+    List<ContactModel> contact = await dbHelper.getData();
+    setState(() {
+      contactList = contact;
+    });
+  }
+
+  Future<void> saveData() async {
+    String name = nameController.text;
+    String mobile = mobileController.text;
+
+    if (name.isEmpty || mobile.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Please enter all fields")));
+      return;
+    }
+
+    DbHelper dbHelper = DbHelper();
+
+    await dbHelper.insertRecord(name, mobile);
+
+    nameController.clear();
+    mobileController.clear();
+
+    _loadContacts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +70,7 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               children: [
                 TextFormField(
+                  controller: nameController,
                   decoration: InputDecoration(
                     hint: Text("Name"),
                     label: Text("Enter your name"),
@@ -42,7 +80,7 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(height: 10),
 
                 TextFormField(
-
+                  controller: mobileController,
                   decoration: InputDecoration(
                     hint: Text("Mobile number"),
                     label: Text("Enter your mobile number"),
@@ -51,24 +89,41 @@ class _MyAppState extends State<MyApp> {
 
                 SizedBox(height: 10),
 
-                ElevatedButton(onPressed: () {
-                  String name = nameController.text;
-                  String mobile = mobileController.text;
+                ElevatedButton(onPressed: saveData, child: Text("Save")),
 
-                  DbHelper dbHelper = DbHelper();
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: contactList.length,
+                    itemBuilder: (context, index) {
+                      ContactModel model = contactList[index];
 
-                  dbHelper.insertRecord(name, mobile);
-                  print("okkkkkkkk inserted");
-
-                }, child: Text("Save")),
-
-                ListView(
-                  
-                )
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            model.name,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            model.mobile,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          // Divider(),
+                          SizedBox(height: 10,)
+                        ],
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
-
-            
           ),
         ),
       ),
